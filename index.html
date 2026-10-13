@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>a house is not a home</title>
+<meta name="description" content="A House Is Not A Home by Geraint Evans: drawn images and simple animation make an uneasy interactive journey through a suburban dwelling.">
+<!--
+    a house is not a home: images copyright Geraint Evans 1997, technical direction Chris Panton (Panart), produced by e-2
+
+    Each scene is an SVG the size of the original pages (650 x 500), named after the page it was
+    (fr.html is #fr). Its links are rectangles over the drawing, from the pages' image maps, or the
+    images themselves where a page was built from several. :target shows the scene in the address,
+    and #fr, the front of the house, when there isn't one.
+-->
+<style>
+html, body {
+    margin: 0;
+    height: 100%;
+}
+body {
+    background: #182224;
+}
+/* two scenes (sia, tba) had a lighter background */
+body:has(svg[data-background]:target) {
+    background: #41484c;
+}
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100dvh;
+    overflow: hidden;
+}
+svg {
+    display: none;
+    /* as large as the window allows, at 650 x 500 */
+    width: min(100vw, 100dvh * 650 / 500);
+    height: auto;
+}
+svg:target,
+main:not(:has(svg:target)) #fr {
+    display: block;
+}
+/* the image map areas: invisible, but there for the pointer */
+rect {
+    fill: transparent;
+}
+a {
+    cursor: pointer;
+}
+a:focus {
+    outline: none;
+}
+a:focus-visible rect {
+    stroke: #9999bb;
+    stroke-width: 2;
+    stroke-dasharray: 4 4;
+}
+a:focus-visible image {
+    opacity: .85;
+}
+/* the front door, lit up under the pointer */
+.over {
+    opacity: 0;
+}
+a:hover .over,
+a:focus-visible .over {
+    opacity: 1;
+}
+</style>
+</head>
+<body>
+<main>
+    <svg id="fr" viewBox="0 0 650 500">
+        <a href="#hab"><image href="fr1.gif" x="0" y="0" width="230" height="500"/><image class="over" href="fr3.gif" x="0" y="0" width="230" height="500"/></a>
+        <image href="fr2.gif" x="230" y="0" width="420" height="500"/>
+    </svg>
+    <svg id="hab" viewBox="0 0 650 500">
+        <image href="hab.gif" width="650" height="500"/>
+        <a href="#haa"><rect x="377" y="171" width="138" height="198"/></a>
+        <a href="#sia"><rect x="579" y="107" width="70" height="370"/></a>
+        <a href="#hac"><rect x="215" y="3" width="127" height="135"/></a>
+        <a href="#fr"><rect x="1" y="345" width="82" height="91"/></a>
+    </svg>
+    <svg id="haa" viewBox="0 0 650 500">
+        <image href="haa.gif" width="650" height="500"/>
+        <a href="#hab"><rect x="39" y="161" width="170" height="294"/></a>
+        <a href="#kta"><rect x="564" y="123" width="78" height="211"/></a>
+        <a href="#tba"><rect x="401" y="147" width="69" height="162"/></a>
+    </svg>
+    <svg id="hac" viewBox="0 0 650 500">
+        <image href="hac.gif" width="650" height="500"/>
+        <a href="#la"><rect x="167" y="0" width="219" height="326"/></a>
+        <a href="#had"><rect x="404" y="1" width="245" height="279"/></a>
+        <a href="#hab"><rect x="1" y="363" width="648" height="136"/></a>
+    </svg>
+    <svg id="had" viewBox="0 0 650 500">
+        <image href="had.gif" width="650" height="500"/>
+        <a href="#be"><rect x="218" y="86" width="69" height="229"/></a>
+        <a href="#nua"><rect x="345" y="114" width="68" height="164"/></a>
+        <a href="#hae"><rect x="369" y="389" width="138" height="110"/></a>
+        <a href="#la"><rect x="1" y="1" width="99" height="498"/></a>
+    </svg>
+    <svg id="hae" viewBox="0 0 650 500">
+        <image href="hae.gif" width="650" height="500"/>
+        <a href="#fr"><rect x="292" y="1" width="80" height="145"/></a>
+        <a href="#hab"><rect x="77" y="150" width="340" height="349"/></a>
+    </svg>
+    <svg id="kta" viewBox="0 0 650 500">
+        <image href="kta.gif" width="650" height="500"/>
+        <a href="#ktb"><rect x="178" y="81" width="280" height="276"/></a>
+        <a href="#haa"><rect x="1" y="1" width="173" height="498"/></a>
+        <a href="#haa"><rect x="490" y="1" width="159" height="498"/></a>
+    </svg>
+    <svg id="ktb" viewBox="0 0 650 500">
+        <image href="ktb.gif" width="650" height="500"/>
+        <a href="#kta"><rect x="3" y="9" width="643" height="483"/></a>
+    </svg>
+    <svg id="la" viewBox="0 0 650 500">
+        <image href="la.gif" width="650" height="500"/>
+        <a href="#bra"><rect x="203" y="218" width="76" height="157"/></a>
+        <a href="#hac"><rect x="1" y="431" width="648" height="68"/></a>
+        <a href="#had"><rect x="549" y="1" width="100" height="429"/></a>
+    </svg>
+    <svg id="bra" viewBox="0 0 650 500">
+        <image href="bra.gif" width="650" height="500"/>
+        <a href="#had"><rect x="1" y="0" width="231" height="499"/></a>
+        <a href="#brb"><rect x="346" y="0" width="303" height="499"/></a>
+    </svg>
+    <svg id="brb" viewBox="0 0 650 500">
+        <image href="brb.gif" width="650" height="500"/>
+        <a href="#bra"><rect x="1" y="1" width="639" height="489"/></a>
+    </svg>
+    <svg id="be" viewBox="0 0 650 500">
+        <a href="#had"><image href="be1.gif" x="0" y="0" width="400" height="500"/></a>
+        <a href="#had"><image href="be2an.gif" x="400" y="0" width="180" height="500"/></a>
+        <a href="#had"><image href="be2.gif" x="580" y="0" width="70" height="500"/></a>
+    </svg>
+    <svg id="nua" viewBox="0 0 650 500">
+        <image href="nua.gif" width="650" height="500"/>
+        <a href="#had"><rect x="101" y="1" width="89" height="211"/></a>
+        <a href="#nub"><rect x="222" y="1" width="427" height="498"/></a>
+    </svg>
+    <svg id="nub" viewBox="0 0 650 500">
+        <a href="#nua"><image href="nub2.gif" x="0" y="0" width="270" height="500"/></a>
+        <a href="#nua"><image href="nub4an.gif" x="270" y="0" width="200" height="500"/></a>
+        <a href="#nua"><image href="nub4.gif" x="470" y="0" width="180" height="500"/></a>
+    </svg>
+    <svg id="sia" viewBox="0 0 650 500" data-background="#41484C">
+        <image href="sia.gif" width="650" height="500"/>
+        <a href="#sib"><rect x="344" y="366" width="64" height="56"/></a>
+        <a href="#sib"><rect x="385" y="93" width="70" height="75"/></a>
+    </svg>
+    <svg id="sib" viewBox="0 0 650 500">
+        <a href="#hab"><image href="sib1.gif" x="0" y="0" width="280" height="500"/></a>
+        <a href="#hab"><image href="siban1.gif" x="280" y="0" width="370" height="500"/></a>
+    </svg>
+    <svg id="tba" viewBox="0 0 650 500" data-background="#41484C">
+        <image href="tba.gif" width="650" height="500"/>
+        <a href="#tbb"><rect x="263" y="122" width="56" height="77"/></a>
+    </svg>
+    <svg id="tbb" viewBox="0 0 650 500">
+        <image href="tbb.gif" width="650" height="500"/>
+        <a href="#haa"><rect x="1" y="381" width="648" height="118"/></a>
+        <a href="#ba"><rect x="412" y="58" width="231" height="247"/></a>
+    </svg>
+    <svg id="tbc" viewBox="0 0 650 500">
+        <image href="tbb.gif" width="650" height="500"/>
+        <a href="#haa"><rect x="1" y="381" width="648" height="118"/></a>
+        <a href="#ba"><rect x="412" y="58" width="231" height="247"/></a>
+        <a href="#tbd"><rect x="263" y="122" width="56" height="77"/></a>
+    </svg>
+    <svg id="tbd" viewBox="0 0 650 500">
+        <image href="tba.gif" width="650" height="500"/>
+        <a href="#haa"><rect x="1" y="381" width="648" height="118"/></a>
+        <a href="#ba"><rect x="412" y="58" width="231" height="247"/></a>
+        <a href="#tbd"><rect x="263" y="122" width="56" height="77"/></a>
+    </svg>
+    <svg id="ba" viewBox="0 0 650 500">
+        <a href="#tbb"><image href="ba1.gif" x="0" y="0" width="650" height="125"/></a>
+        <a href="#tbc"><image href="ba3.gif" x="0" y="125" width="355" height="240"/></a>
+        <a href="#tbc"><image href="baan.gif" x="355" y="125" width="240" height="240"/></a>
+        <a href="#tbc"><image href="ba5.gif" x="595" y="125" width="55" height="240"/></a>
+        <a href="#tbb"><image href="ba2.gif" x="0" y="365" width="650" height="135"/></a>
+    </svg>
+</main>
+<script>
+/* load every drawing now, so each scene appears straight away */
+new Set([...document.querySelectorAll('image')].map(image => image.getAttribute('href')))
+    .forEach(src => new Image().src = src);
+</script>
+</body>
+</html>
