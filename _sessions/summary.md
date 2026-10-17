@@ -1,6 +1,6 @@
 # A House Is Not A Home as a single page: session summary
 
-13 October 2026, working with Claude Code on the `redux` branch. The same session also worked on Tome, Word Perhect and Adelaide (see those repositories). The A House Is Not A Home part of the conversation is in [2026-10-13-transcript.md](2026-10-13-transcript.md).
+13 October 2026, working with Claude Code on the `redux` branch. The same session also worked on Tome, Word Perhect and Adelaide (see those repositories). The A House Is Not A Home part of the conversation is in [transcript.md](transcript.md).
 
 ## Aim
 
