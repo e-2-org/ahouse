@@ -1,0 +1,67 @@
+# A House Is Not A Home as a single page: session summary
+
+13 October 2026, working with Claude Code on the `redux` branch. The same session also worked on Tome, Word Perhect and Adelaide (see those repositories). The A House Is Not A Home part of the conversation is in [transcript.md](transcript.md).
+
+## Aim
+
+Modernise A House Is Not A Home (Geraint Evans, technical direction by Chris Panton of Panart, produced by e-2):
+
+- one HTML page in place of the 21 originals
+- flexbox to centre the images, scaling up on large screens
+- every image preloaded
+- SVG image maps, so the hotspots scale with the drawings
+
+## What was there
+
+- **21 pages**, each 650×500, starting from `fr.html` (the front of the house).
+- **16 pages** were one drawing with a client-side image map of rectangles: `haa`, `hab`, `hac`, `had`, `hae`, `kta`, `ktb`, `la`, `bra`, `brb`, `nua`, `sia`, `tba`, `tbb`, `tbc` and `tbd`.
+- **5 pages** were tables of image slices, each slice a link:
+  - `fr`: the door slice swaps `fr1.gif` for `fr3.gif` on mouseover, so the door opens.
+  - `ba`, `be`, `nub` and `sib`: these include the looping animations `baan.gif`, `be2an.gif`, `nub4an.gif` and `siban1.gif`.
+- **Preloading:** each page loaded the next pages' GIFs as 5×5 images at the bottom.
+- **Backgrounds:** `#182224`, except `sia` and `tba`, which were `#41484C`.
+- **15 `.map` files:** server-side NCSA image maps, the fallback for browsers without client-side maps. They had drifted from the pages:
+  - in `bra.map` the left area goes to `la.html`, where the page sends it to `had.html`
+  - `hab.map` has no link back to `fr.html`
+  - `brb.map` points at `brA.html`
+  - `hab.map` points at `hac.htm`
+- **Quirks:**
+  - `tbc` is `tbb.gif` with one more hotspot, leading to `tbd`.
+  - `tbd` shows `tba.gif` with `tbb`'s hotspots, and its middle hotspot links to itself.
+  - `ba.html` used `ba4.gif` as a Netscape `lowsrc` placeholder while `baan.gif` loaded.
+- **Also on every page:** Dublin Core metadata and a Google Analytics (`ga.js`) snippet.
+
+## What was done
+
+**`index.html`**:
+
+- **Scenes.** Each old page is an inline `<svg>` with `viewBox="0 0 650 500"` and the page's name as its `id` (`fr.html` is `#fr`).
+  - Image-map areas are transparent `<rect>`s inside SVG `<a href="#…">` links.
+  - The table pages are SVG `<image>`s at their original positions, each inside its link.
+  - The front door's rollover is a second `<image>`, shown on hover and keyboard focus.
+- **Generated, not retyped.** The scenes were made by a script from the old pages, so every coordinate and link is the original.
+- **Navigation.** The links are plain `#fragment` links, and CSS `:target` shows the scene in the address. `#fr` shows when there's no fragment, using `main:not(:has(svg:target))`. The back button and links straight to a scene work with no routing code.
+- **Layout.** Flexbox centres the scene horizontally and vertically. It is `min(100vw, 100dvh × 650/500)` wide, so it fills as much of the window as it can at the original proportions, larger or smaller than 650×500.
+- **Backgrounds.** `body:has(svg[data-background]:target)` gives `sia` and `tba` their lighter background.
+- **Preloading.** A short script loads every GIF the scenes use when the page opens.
+- **Keyboard.** Hotspots can be reached with Tab and show a dashed outline when focused.
+
+**Removed:** the 21 old pages and the 15 `.map` files, with `git rm`, so they're still in history.
+
+## Checks
+
+These were run in Chrome (Playwright) at 1600×1000 and 390×844:
+
+- **Links:** all 53 links, in every scene, were clicked at the centre of their original area, mapped onto the scaled drawing. Each landed on the scene the old page linked to.
+- **Start and layout:** the page starts on `#fr`, and the scene is centred: 1300×1000 on the desktop, 390×300 on the phone. Neither size scrolls.
+- **Behaviour:** the front door opens on hover, the back button returns to the previous scene, and `sia` and `hab` show their own backgrounds.
+- **Loading:** 30 GIFs load (all but `ba4.gif`), with no errors and no missing files.
+
+## Status
+
+Uncommitted: `index.html` is new, and the old pages and maps are staged as deletions.
+
+To decide:
+
+- Links to `fr.html` or the other old pages will now get a 404. They need to point at `index.html` (or `index.html#scene`), or small redirect pages could be added.
+- `ba4.gif` (the `lowsrc` placeholder) is no longer used, but was left in place.
