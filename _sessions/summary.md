@@ -65,3 +65,42 @@ To decide:
 
 - Links to `fr.html` or the other old pages will now get a 404. They need to point at `index.html` (or `index.html#scene`), or small redirect pages could be added.
 - `ba4.gif` (the `lowsrc` placeholder) is no longer used, but was left in place.
+
+---
+
+# Matching colours across the image slices: session summary
+
+18 October 2026, working with Claude Code on `main`. Nothing was committed. The conversation is in [transcript.md](transcript.md).
+
+## Aim
+
+The scenes built from several GIFs (`fr`, `be`, `nub`, `sib` and `ba`) show visible colour changes where the slices meet. Each slice was saved with its own small palette (16 or 32 colours), so the same surface came out in slightly different colours. The aim was to make the colours match at every join, without changing the drawings.
+
+## What was done
+
+All changes are to the copies in `docs/images/`. The originals at the repo root were left untouched. The scripts are not in the repo.
+
+- **fr** (fr2 kept as the reference):
+  - **fr1:** the arch (`#b3a37e`), plant pot (`#ac693e`), doorstep and brown door frame now use fr2's colours.
+  - **fr3** is fr1 with the door open, saved with its own 32-colour palette, which made the wall blotchy. Outside the doorway it is now the corrected fr1, pixel for pixel. Inside the doorway it keeps its stairs and hall, with fr1's colours for the outlines, door and frame. fr1 and fr3 now differ only inside the doorway, so nothing else changes colour when the door opens on hover.
+  - **Side effects:** the arch is now the same stone colour as the fanlight frame, because fr2 uses one colour for both, so it is a little less yellow. In fr3, the bar above the door is now wall pink to match fr1. The two originals disagreed there.
+- **nub** (nub4an changed to match nub2 and nub4): the floor, back wall and the cupboard that crosses the join. The cupboard's dark base had been grey on one side and navy on the other.
+- **sib** (siban1 changed to match sib1): one door panel, which was greyer in siban1, and siban1's dark grey outlines, which are now black like sib1's and every other scene's.
+- **be** (be1 changed to match be2an): the picture rail and skirting board. Only the parts touching the join were recoloured, so the picture frame, which used the same orange, is unchanged.
+- **Trimmed columns:** be1 was 401px wide in a 400px slot, with a last column that repeated be2an's first. ba5 was 56px wide in a 55px slot, with a white line as its last column. Both extra columns were removed, so every image in `index.html` now matches the size it is given.
+- **ba** needed nothing else.
+
+## Method
+
+- **Finding mismatches:** the colours on both sides of every join were compared for every frame of the animations, and each join was viewed zoomed in.
+- **Recolouring:** colours used only for one surface (nub4an's floor and wall) were replaced throughout. Shared colours were changed only in the area that touches the join, using a flood fill, so other objects in the same colour were left alone.
+- **Animations:** they were rewritten frame by frame with the same frame count, timings and looping. Every saved file was read back and matched the intended pixels exactly.
+
+## Notes
+
+- **Still different:** a few joins still differ where the line drawings themselves don't meet: the radiator stripes in be, and green-tinged outline pixels down the middle of the sib door. Recolouring can't fix those, and they can't be seen at normal size.
+- **Scene size:** the user has limited the scene to 650×500, because scaled images looked poor. At that size every image shows pixel for pixel.
+
+## Status
+
+Uncommitted: the new `fr1`, `fr3`, `nub4an`, `siban1`, `be1` and `ba5` GIFs in `docs/images/`, along with the user's other uncommitted work (`docs/index.html`, the move of the images into `docs/images/`, `favicon.ico`, `icons/`, `robots.txt`).
